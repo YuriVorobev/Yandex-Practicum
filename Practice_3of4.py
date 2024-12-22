@@ -18,8 +18,11 @@ class CipherMaster:
             else:
                 new_letter = letter
             result.append(new_letter)
+            string_result = ''.join(result)
         
-        return ''.join(result)
+        return string_result
+
+
     def decipher(self, cipher_text, shift):
         # Метод должен возвращать исходный текст
         # с учётом переданного смещения shift.
@@ -31,7 +34,7 @@ class CipherMaster:
                 letter_index = CipherMaster.alphabet.index(letter)
                 new_index = letter_index - shift
                 if new_index < 0:
-                    new_index = len(CipherMaster.alphabet) + letter_index + shift
+                    new_index = len(CipherMaster.alphabet) + new_index % len(CipherMaster.alphabet)
                 elif new_index > CipherMaster.last_index:
                     new_index = 0 + new_index % (len(CipherMaster.alphabet))
                 new_letter = CipherMaster.alphabet[new_index]
@@ -39,16 +42,17 @@ class CipherMaster:
             else:
                 new_letter = letter
             result.append(new_letter)
+            string_result = ''.join(result)
         
-        return ''.join(result)
+        return string_result
 
 
 cipher_master = CipherMaster()
 print(cipher_master.cipher(
     original_text='Однажды ревьюер принял проект с первого раза, с тех пор я его боюсь',
-    shift=2
+    shift=2+66
 ))
 print(cipher_master.decipher(
     cipher_text='Олебэи яфвнэ мроплж сэжи — э пэй рдв злййвкпш лп нвящывнэ',
-    shift=-3
+    shift=-3-66
 ))
